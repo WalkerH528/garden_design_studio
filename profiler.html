@@ -298,6 +298,24 @@ function plainReadout(pos){
     {mild:"leaning towards bolder colour",strong:"bold, bright colour"});
   return "You tended to prefer gardens that are "+f+", with "+e+" character and "+c+".";
 }
+
+// Client-facing readout: formality + era only (the reliable axes), no colour,
+// no style name. Phrased as gentle observation. Always shown, even if balanced.
+function clientReadout(pos){
+  const band=(v,neg,mid,pos2)=>{
+    if(v<=-1.0)return neg.strong; if(v<-0.25)return neg.mild;
+    if(v<=0.25)return mid; if(v<1.0)return pos2.mild; return pos2.strong;
+  };
+  const f=band(pos.formality,
+    {strong:"formal, structured spaces",mild:"slightly more formal spaces"},
+    "a balance of formal and relaxed spaces",
+    {mild:"slightly more relaxed, informal spaces",strong:"relaxed, informal spaces"});
+  const e=band(pos.era,
+    {strong:"a traditional feel",mild:"a slightly traditional feel"},
+    "a mix of traditional and contemporary",
+    {mild:"a slightly contemporary feel",strong:"a contemporary feel"});
+  return "Looking at your choices, you seemed drawn to "+f+" with "+e+".";
+}
 // ===== end scoring engine =====
 
 function go(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
@@ -468,6 +486,8 @@ function editUses(){ editReturn=true; buildUses(); go('s-uses'); }
 function editFeelings(){ editReturn=true; buildFeelings(); go('s-feelings'); }
 
 function buildSummary(){
+  const _res = scoreProfile(R.swipes.filter(s=>s));
+  const _readout = clientReadout(_res.axes);
   const likes=R.swipes.filter(s=>s&&s.verdict==='like').length;
   const dislikes=R.swipes.filter(s=>s&&s.verdict==='dislike').length;
   const neutrals=R.swipes.filter(s=>s&&s.verdict==='neutral').length;
@@ -496,7 +516,7 @@ function buildSummary(){
       </div>
       ${notes?`<div style="padding:0 14px 11px;font-size:12px;color:var(--ink-light);text-align:center;">${notes} note${notes>1?'s':''} added</div>`:''}
     </div>
-    <p style="margin-top:16px;font-size:13px;color:var(--ink-mid);font-style:italic;line-height:1.6;text-align:center;">From the gardens you were drawn to, some themes are starting to emerge &mdash; we'll explore these together when we meet.</p>`;
+    <p style="margin-top:16px;font-size:13px;color:var(--ink-mid);font-style:italic;line-height:1.6;text-align:center;">${_readout}<br><br>This is just a starting point &mdash; we'll explore it all properly when we meet.</p>`;
 }
 
 function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }

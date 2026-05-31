@@ -516,7 +516,11 @@ function buildSummary(){
       </div>
       ${notes?`<div style="padding:0 14px 11px;font-size:12px;color:var(--ink-light);text-align:center;">${notes} note${notes>1?'s':''} added</div>`:''}
     </div>
-    <p style="margin-top:16px;font-size:13px;color:var(--ink-mid);font-style:italic;line-height:1.6;text-align:center;">${_readout}<br><br>This is just a starting point &mdash; we'll explore it all properly when we meet.</p>`;
+    <div style="margin-top:18px;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--sage);border-radius:0 8px 8px 0;padding:15px 16px;">
+      <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);margin-bottom:8px;">Your emerging style</div>
+      <div style="font-size:18px;color:var(--ink);line-height:1.5;font-family:'Cormorant Garamond',serif;">${_readout}</div>
+      <div style="font-size:13px;color:var(--ink-mid);line-height:1.6;margin-top:10px;">This is just a starting point &mdash; we'll explore it all properly when we meet.</div>
+    </div>`;
 }
 
 function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }

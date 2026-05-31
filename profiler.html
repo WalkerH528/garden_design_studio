@@ -222,6 +222,7 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
     <h2 style="font-size:30px;margin-bottom:14px;">Thank you</h2>
     <p style="color:var(--ink-mid);margin-bottom:12px;">Your responses have been saved and shared with me.</p>
     <p style="color:var(--ink-mid);">If you've come across any images of gardens you love, gather them together to share with me when we meet &mdash; I'd love to see them.</p>
+    <div id="send-error" style="display:none;margin-top:20px;font-size:13px;color:#c0392b;background:#fbeaea;border:1px solid #e8c5c5;border-radius:6px;padding:12px 14px;line-height:1.5;">Hmm &mdash; something went wrong sending your responses. Please check your connection and try again, or let me know at <a class="inline-link" href="mailto:greensfollygardens@outlook.com">Greens Folly Gardens</a>.</div>
   </div>
 </div>
 <script>
@@ -565,7 +566,9 @@ function submit(){
   SESSION.submittedAt = new Date().toISOString();
   go('s-thanks');
 
-  // 1. Send to Formspree: readable summary + full data block (for Studio import).
+  // Send to Formspree: readable summary + full data block (for Studio import).
+  // Nothing is downloaded to the client's device. If the send fails, show a
+  // gentle error on the thank-you screen so the response isn't silently lost.
   const payload = {
     summary: buildReadableSummary(),
     pin: SESSION.pin || '',
@@ -576,19 +579,14 @@ function submit(){
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
     body: JSON.stringify(payload)
-  }).catch(()=>{ /* if send fails, the file download below is the backup */ });
+  }).then(res=>{
+    if(!res.ok) showSendError();
+  }).catch(()=>{ showSendError(); });
+}
 
-  // 2. Keep the file download as a backup.
-  setTimeout(()=>{
-    const html = '<!DOCTYPE html>'+document.documentElement.outerHTML.replace(
-      /const SESSION = .+?;/, 'const SESSION = '+JSON.stringify(SESSION)+';'
-    );
-    const blob = new Blob([html],{type:'text/html'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'garden-style-profiler-completed.html';
-    a.click(); URL.revokeObjectURL(a.href);
-  },600);
+function showSendError(){
+  const el = document.getElementById('send-error');
+  if (el) el.style.display='block';
 }
 </script>
 </body>

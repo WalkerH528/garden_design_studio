@@ -58,11 +58,12 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
 <div class="screen" id="s-welcome">
   <div class="backbar"><button class="back-btn" onclick="go('s-pin')">&larr; Back</button></div>
   <div class="inner inner-center">
-    <div style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);margin-bottom:16px;">Your garden, your way</div>
-    <h1 style="font-size:34px;line-height:1.1;margin-bottom:18px;">Let's explore<br>your style</h1>
+    <div style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);margin-bottom:16px;">Greens Folly Gardens</div>
+    <h1 style="font-size:32px;line-height:1.1;margin-bottom:18px;">Let's explore your style</h1>
     <p style="color:var(--ink-mid);margin-bottom:8px;">Make a cup of tea, find a quiet spot, and settle in &mdash; this is a bit of me-time to think about what you want from your garden.</p>
-    <p style="color:var(--ink-mid);margin-bottom:8px;">It takes around 10&ndash;15 minutes. There are no right or wrong answers &mdash; just your honest reactions.</p>
-    <p style="color:var(--ink-mid);margin-bottom:28px;">I'll use this as a starting point for our first conversation &mdash; nothing here is set in stone.</p>
+    <p style="color:var(--ink-mid);margin-bottom:8px;">I'll use this as a starting point for our first conversation &mdash; nothing here is set in stone.</p>
+    <p style="color:var(--ink-mid);margin-bottom:8px;">It takes around 10&ndash;15 minutes.</p>
+    <p style="color:var(--ink-mid);margin-bottom:28px;">There are no right or wrong answers &mdash; just your honest reactions.</p>
     <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;">
       <div style="display:flex;align-items:center;gap:12px;">
         <div style="width:28px;height:28px;border-radius:50%;background:var(--sage-light);color:var(--sage-dark);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;">1</div>
@@ -87,7 +88,7 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
   <div class="inner inner-scroll">
     <div style="margin-bottom:18px;">
       <span class="step-badge">Part 1 of 3</span>
-      <h2 style="font-size:26px;margin-bottom:8px;">How will you use it?</h2>
+      <h2 style="font-size:26px;margin-bottom:8px;">How would you like to use your garden?</h2>
       <p style="font-size:13px;color:var(--ink-mid);">Tick everything that applies.<br>I'll explore this further when we meet.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:16px;" id="uses-list"></div>
@@ -96,6 +97,7 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
       <textarea id="uses-other" rows="2" placeholder="Add anything not listed above&hellip;"
         style="width:100%;font-family:'Jost',sans-serif;font-size:14px;font-weight:300;padding:10px 12px;border:1px solid var(--border);border-radius:4px;background:var(--white);color:var(--ink);resize:none;"></textarea>
     </div>
+    <div id="uses-nudge" style="display:none;font-size:13px;color:var(--ink-mid);background:var(--sage-light);padding:10px 12px;border-radius:6px;margin-bottom:12px;">Select at least one to continue &mdash; or tap Next again to skip if none apply.</div>
     <button class="btn btn-p" onclick="saveUses()">Next &rarr;</button>
   </div>
 </div>
@@ -110,6 +112,7 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
       <p style="font-size:13px;color:var(--ink-mid);">Select all the words that resonate.</p>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;" id="feeling-cards"></div>
+    <div id="feel-nudge" style="display:none;font-size:13px;color:var(--ink-mid);background:var(--sage-light);padding:10px 12px;border-radius:6px;margin-bottom:12px;">Select at least one to continue &mdash; or tap Next again to skip if none apply.</div>
     <button class="btn btn-p" onclick="feelingsNext()">Next &rarr;</button>
   </div>
 </div>
@@ -122,6 +125,7 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
     <h2 style="font-size:26px;margin-bottom:14px;">Let's look at some gardens</h2>
     <p style="color:var(--ink-mid);margin-bottom:4px;">Now, the fun part&hellip;</p>
     <p style="color:var(--ink-mid);margin-bottom:4px;">You'll see a series of garden photographs.</p>
+    <p style="color:var(--ink-mid);margin-bottom:4px;">Look at each one and show me whether you like it, dislike it, or feel neutral.</p>
     <p style="color:var(--ink-mid);margin-bottom:4px;">There's no need to overthink it &mdash; just go with your gut.</p>
     <p style="color:var(--ink-mid);margin-bottom:28px;">Your first reaction is the one that counts.</p>
     <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
@@ -138,7 +142,7 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
         <div><div style="font-size:13px;font-weight:400;margin-bottom:1px;">Swipe up, or tap Neutral</div><div style="font-size:12px;color:var(--ink-light);">Take it or leave it</div></div>
       </div>
     </div>
-    <p style="font-size:12px;color:var(--ink-light);text-align:center;margin-bottom:20px;">If a picture brings something to mind, you can add a note &mdash; no pressure.</p>
+    <p style="font-size:12px;color:var(--ink-light);text-align:center;margin-bottom:20px;">If a picture brings something to mind, you can add a note.</p>
     <button class="btn btn-p" onclick="startSwipe()">Start &rarr;</button>
   </div>
 </div>
@@ -146,7 +150,6 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
 <!-- SCREEN 6: SWIPE -->
 <div class="screen" id="s-swipe">
   <div style="padding:14px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border);flex-shrink:0;">
-    <button class="back-btn" id="swipe-back" onclick="swipeBack()" style="display:none;white-space:nowrap;">&larr; Back</button>
     <div style="flex:1;height:3px;background:var(--border);border-radius:2px;overflow:hidden;">
       <div id="swipe-prog" style="height:100%;background:var(--sage);border-radius:2px;width:0%;transition:width 0.3s;"></div>
     </div>
@@ -163,15 +166,16 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
           <img id="swipe-img" src="" alt="" style="width:100%;height:60vw;max-height:340px;object-fit:cover;display:block;">
           <!-- subtle on-image swipe direction arrows -->
           <div class="swipe-edge" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);text-align:center;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.5);pointer-events:none;">
-            <div style="font-size:20px;line-height:1;">&larr;</div><div style="font-size:9px;letter-spacing:0.05em;text-transform:uppercase;">Not for me</div>
+            <div style="font-size:20px;line-height:1;">&larr;</div><div style="font-size:9px;letter-spacing:0.05em;text-transform:uppercase;background:rgba(0,0,0,0.35);padding:2px 6px;border-radius:10px;">Dislike</div>
           </div>
           <div class="swipe-edge" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);text-align:center;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.5);pointer-events:none;">
-            <div style="font-size:20px;line-height:1;">&rarr;</div><div style="font-size:9px;letter-spacing:0.05em;text-transform:uppercase;">Appeals</div>
+            <div style="font-size:20px;line-height:1;">&rarr;</div><div style="font-size:9px;letter-spacing:0.05em;text-transform:uppercase;background:rgba(0,0,0,0.35);padding:2px 6px;border-radius:10px;">Like</div>
           </div>
           <div class="swipe-edge" style="position:absolute;top:8px;left:50%;transform:translateX(-50%);text-align:center;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.5);pointer-events:none;">
-            <div style="font-size:20px;line-height:1;">&uarr;</div><div style="font-size:9px;letter-spacing:0.05em;text-transform:uppercase;">Take or leave</div>
+            <div style="font-size:20px;line-height:1;">&uarr;</div><div style="font-size:9px;letter-spacing:0.05em;text-transform:uppercase;background:rgba(0,0,0,0.35);padding:2px 6px;border-radius:10px;">Neutral</div>
           </div>
         </div>
+        <div style="padding:8px 0 0;text-align:center;font-size:12px;color:var(--ink-light);">Swipe the photo, or tap a button below.</div>
         <!-- note affordance (note BEFORE swipe) -->
         <div style="padding:8px 0 0;text-align:center;">
           <button id="add-note-btn" onclick="openNote()" style="background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;color:var(--ink-light);cursor:pointer;text-decoration:underline;">+ Add a note</button>
@@ -185,21 +189,21 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
   </div>
 
   <div style="padding:12px 24px 26px;display:flex;gap:10px;justify-content:center;max-width:380px;margin:0 auto;width:100%;flex-shrink:0;" id="swipe-buttons">
-    <button onclick="doSwipe('dislike')" style="flex:1;padding:13px;border-radius:50px;border:1px solid var(--border);background:var(--white);font-size:13px;cursor:pointer;color:var(--ink-mid);font-family:'Jost',sans-serif;">&larr; Not for me</button>
-    <button onclick="doSwipe('neutral')" style="flex:0.85;padding:13px;border-radius:50px;border:1px solid var(--border);background:var(--white);font-size:12px;cursor:pointer;color:var(--ink-light);font-family:'Jost',sans-serif;">&uarr;</button>
-    <button onclick="doSwipe('like')" style="flex:1;padding:13px;border-radius:50px;border:1px solid var(--sage-light);background:var(--sage-light);font-size:13px;cursor:pointer;color:var(--sage-dark);font-family:'Jost',sans-serif;">Appeals &rarr;</button>
+    <button onclick="doSwipe('dislike')" style="flex:1;padding:13px;border-radius:50px;border:1px solid var(--border);background:var(--white);font-size:13px;cursor:pointer;color:var(--ink-mid);font-family:'Jost',sans-serif;">Dislike</button>
+    <button onclick="doSwipe('neutral')" style="flex:0.85;padding:13px;border-radius:50px;border:1px solid var(--border);background:var(--white);font-size:12px;cursor:pointer;color:var(--ink-light);font-family:'Jost',sans-serif;">Neutral</button>
+    <button onclick="doSwipe('like')" style="flex:1;padding:13px;border-radius:50px;border:1px solid var(--sage-light);background:var(--sage-light);font-size:13px;cursor:pointer;color:var(--sage-dark);font-family:'Jost',sans-serif;">Like</button>
   </div>
+  <div style="text-align:center;padding:0 24px 20px;flex-shrink:0;"><button class="back-btn" id="swipe-back" onclick="swipeBack()" style="display:none;">&larr; Back</button></div>
 </div>
 
 <!-- SCREEN 7 REMOVED (old reason-pills follow-up panel deleted) -->
 
 <!-- SCREEN 8: SUBMIT / SUMMARY -->
 <div class="screen" id="s-submit">
-  <div class="backbar"><button class="back-btn" onclick="reviewImages()">&larr; Review images</button></div>
   <div class="inner inner-scroll">
     <div style="margin-bottom:20px;">
-      <h2 style="font-size:30px;margin-bottom:10px;">All done</h2>
-      <p style="color:var(--ink-mid);">Here's everything you've shared. Have a look back through, and when it feels right, send it over to me.</p>
+      <h2 style="font-size:30px;margin-bottom:10px;">Thank you for sharing your views</h2>
+      <p style="color:var(--ink-mid);">You can review and update your answers below if needed, then send it over to me.</p>
     </div>
     <div id="submit-summary" style="margin-bottom:16px;"></div>
     <div style="margin-bottom:18px;">
@@ -214,16 +218,16 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
 <!-- SCREEN 9: THANKS -->
 <div class="screen" id="s-thanks">
   <div class="inner inner-center" style="text-align:center;">
-    <div style="font-size:48px;margin-bottom:24px;">&#127807;</div>
+    <div style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);margin-bottom:16px;">Greens Folly Gardens</div>
     <h2 style="font-size:30px;margin-bottom:14px;">Thank you</h2>
     <p style="color:var(--ink-mid);margin-bottom:12px;">Your responses have been saved and shared with me.</p>
-    <p style="color:var(--ink-mid);">If you've come across any gardens, plants, or images you love, gather them together to share with me when we meet &mdash; I'd love to see them.</p>
+    <p style="color:var(--ink-mid);">If you've come across any images of gardens you love, gather them together to share with me when we meet &mdash; I'd love to see them.</p>
   </div>
 </div>
 <script>
 window.addEventListener("DOMContentLoaded", initPinFromUrl);
 
-const SESSION = {"clientName":"","projectName":"","pin":null,"createdAt":"2026-05-18T20:40:19.609Z","swipeImages":[{"styleCode": "S1", "styleLabel": "Formal & Classical", "url": "https://www.mariannemajerus.com/cache/pcache2/00179638.jpg"}, {"styleCode": "S1", "styleLabel": "Formal & Classical", "url": "https://www.mariannemajerus.com/cache/pcache2/00174853.jpg"}, {"styleCode": "S1", "styleLabel": "Formal & Classical", "url": "https://www.mariannemajerus.com/cache/pcache2/00159013.jpg"}, {"styleCode": "S1", "styleLabel": "Formal & Classical", "url": "https://www.mariannemajerus.com/cache/pcache2/00155350.jpg"}, {"styleCode": "S2", "styleLabel": "Contemporary Minimalist", "url": "https://www.mariannemajerus.com/cache/pcache2/00103311.jpg"}, {"styleCode": "S2", "styleLabel": "Contemporary Minimalist", "url": "https://www.mariannemajerus.com/cache/pcache2/00101331.jpg"}, {"styleCode": "S2", "styleLabel": "Contemporary Minimalist", "url": "https://www.mariannemajerus.com/cache/pcache2/00101258.jpg"}, {"styleCode": "S3", "styleLabel": "Cottage Garden", "url": "https://www.mariannemajerus.com/cache/pcache2/00068738.jpg"}, {"styleCode": "S3", "styleLabel": "Cottage Garden", "url": "https://www.mariannemajerus.com/cache/pcache2/00173296.jpg"}, {"styleCode": "S3", "styleLabel": "Cottage Garden", "url": "https://www.mariannemajerus.com/cache/pcache2/00172042.jpg"}, {"styleCode": "S3", "styleLabel": "Cottage Garden", "url": "https://www.mariannemajerus.com/cache/pcache2/00176294.jpg"}, {"styleCode": "S4", "styleLabel": "Naturalistic / Prairie", "url": "https://www.mariannemajerus.com/cache/pcache2/00006338.jpg"}, {"styleCode": "S4", "styleLabel": "Naturalistic / Prairie", "url": "https://www.mariannemajerus.com/cache/pcache2/00011008.jpg"}, {"styleCode": "S4", "styleLabel": "Naturalistic / Prairie", "url": "https://www.mariannemajerus.com/cache/pcache2/00007742.jpg"}, {"styleCode": "S5", "styleLabel": "Woodland & Shade", "url": "https://www.mariannemajerus.com/cache/pcache2/00118735.jpg"}, {"styleCode": "S5", "styleLabel": "Woodland & Shade", "url": "https://www.mariannemajerus.com/cache/pcache2/00169170.jpg"}, {"styleCode": "S5", "styleLabel": "Woodland & Shade", "url": "https://www.mariannemajerus.com/cache/pcache2/00072806.jpg"}, {"styleCode": "S5", "styleLabel": "Woodland & Shade", "url": "https://www.mariannemajerus.com/cache/pcache2/00033199.jpg"}, {"styleCode": "S6", "styleLabel": "Wildflower Meadow", "url": "https://www.mariannemajerus.com/cache/pcache2/00089252.jpg"}, {"styleCode": "S6", "styleLabel": "Wildflower Meadow", "url": "https://www.mariannemajerus.com/cache/pcache2/00050290.jpg"}, {"styleCode": "S6", "styleLabel": "Wildflower Meadow", "url": "https://www.mariannemajerus.com/cache/pcache2/00077619.jpg"}, {"styleCode": "S7", "styleLabel": "Potager / Kitchen Garden", "url": "https://www.mariannemajerus.com/cache/pcache2/00177501.jpg"}, {"styleCode": "S7", "styleLabel": "Potager / Kitchen Garden", "url": "https://www.mariannemajerus.com/cache/pcache2/00175778.jpg"}, {"styleCode": "S8", "styleLabel": "Contemporary Cottage", "url": "https://www.mariannemajerus.com/cache/pcache2/00148864.jpg"}, {"styleCode": "S8", "styleLabel": "Contemporary Cottage", "url": "https://www.mariannemajerus.com/cache/pcache2/00065513.jpg"}, {"styleCode": "S8", "styleLabel": "Contemporary Cottage", "url": "https://www.mariannemajerus.com/cache/pcache2/00153787.jpg"}, {"styleCode": "S8", "styleLabel": "Contemporary Cottage", "url": "https://www.mariannemajerus.com/cache/pcache2/00153061.jpg"}, {"styleCode": "S9", "styleLabel": "Mediterranean / Gravel & Coastal", "url": "https://www.mariannemajerus.com/cache/pcache2/00165424.jpg"}, {"styleCode": "S9", "styleLabel": "Mediterranean / Gravel & Coastal", "url": "https://www.mariannemajerus.com/cache/pcache2/00057231.jpg"}, {"styleCode": "S10", "styleLabel": "Japanese / Zen Inspired", "url": "https://www.mariannemajerus.com/cache/pcache2/00171988.jpg"}, {"styleCode": "S11", "styleLabel": "Tropical / Exotic", "url": "https://www.mariannemajerus.com/cache/pcache2/00173896.jpg"}, {"styleCode": "S11", "styleLabel": "Tropical / Exotic", "url": "https://www.mariannemajerus.com/cache/pcache2/00126440.jpg"}, {"styleCode": "S12", "styleLabel": "Formal Contemporary", "url": "https://www.mariannemajerus.com/cache/pcache2/00090117.jpg"}, {"styleCode": "S12", "styleLabel": "Formal Contemporary", "url": "https://www.mariannemajerus.com/cache/pcache2/00090142.jpg"}, {"styleCode": "S12", "styleLabel": "Formal Contemporary", "url": "https://www.mariannemajerus.com/cache/pcache2/00154720.jpg"}, {"styleCode": "S12", "styleLabel": "Formal Contemporary", "url": "https://www.mariannemajerus.com/cache/pcache2/00090124.jpg"}, {"styleCode": "S13", "styleLabel": "Wildlife & Nature", "url": "https://www.mariannemajerus.com/cache/pcache2/00165539.jpg"}, {"styleCode": "S13", "styleLabel": "Wildlife & Nature", "url": "https://www.mariannemajerus.com/cache/pcache2/00139802.jpg"}, {"styleCode": "S13", "styleLabel": "Wildlife & Nature", "url": "https://www.mariannemajerus.com/cache/pcache2/00120382.jpg"}],"feelingWords":[{"word":"Secluded","imageUrl":""},{"word":"Protected","imageUrl":""},{"word":"Calm","imageUrl":""},{"word":"Restored","imageUrl":""},{"word":"Romantic","imageUrl":""},{"word":"Transported","imageUrl":""},{"word":"Connected","imageUrl":""},{"word":"Inspired","imageUrl":""},{"word":"Playful","imageUrl":""},{"word":"Energised","imageUrl":""}],"responses":null};
+const SESSION = {"clientName":"","projectName":"","pin":null,"createdAt":"2026-05-18T20:40:19.609Z","swipeImages":[{"styleCode": "S9", "styleLabel": "Mediterranean / Gravel & Coastal", "url": "https://www.mariannemajerus.com/cache/pcache2/00165424.jpg"}, {"styleCode": "S1", "styleLabel": "Formal & Classical", "url": "https://www.mariannemajerus.com/cache/pcache2/00159013.jpg"}, {"styleCode": "S2", "styleLabel": "Contemporary Minimalist", "url": "https://www.mariannemajerus.com/cache/pcache2/00045880.jpg"}, {"styleCode": "S9", "styleLabel": "Mediterranean / Gravel & Coastal", "url": "https://www.mariannemajerus.com/cache/pcache2/00057231.jpg"}, {"styleCode": "S4", "styleLabel": "Naturalistic / Prairie", "url": "https://www.mariannemajerus.com/cache/pcache2/00011008.jpg"}, {"styleCode": "S13", "styleLabel": "Wildlife & Nature", "url": "https://www.mariannemajerus.com/cache/pcache2/00120382.jpg"}, {"styleCode": "S11", "styleLabel": "Tropical / Exotic", "url": "https://www.mariannemajerus.com/cache/pcache2/00126440.jpg"}, {"styleCode": "S5", "styleLabel": "Woodland & Shade", "url": "https://www.mariannemajerus.com/cache/pcache2/00072806.jpg"}, {"styleCode": "S10", "styleLabel": "Japanese / Zen Inspired", "url": "https://www.mariannemajerus.com/cache/pcache2/00171988.jpg"}, {"styleCode": "S1", "styleLabel": "Formal & Classical", "url": "https://www.mariannemajerus.com/cache/pcache2/00174853.jpg"}, {"styleCode": "S4", "styleLabel": "Naturalistic / Prairie", "url": "https://www.mariannemajerus.com/cache/pcache2/00007742.jpg"}, {"styleCode": "S12", "styleLabel": "Formal Contemporary", "url": "https://www.mariannemajerus.com/cache/pcache2/00154720.jpg"}, {"styleCode": "S7", "styleLabel": "Potager / Kitchen Garden", "url": "https://www.mariannemajerus.com/cache/pcache2/00177501.jpg"}, {"styleCode": "S1", "styleLabel": "Formal & Classical", "url": "https://www.mariannemajerus.com/cache/pcache2/00155350.jpg"}, {"styleCode": "S6", "styleLabel": "Wildflower Meadow", "url": "https://www.mariannemajerus.com/cache/pcache2/00089252.jpg"}, {"styleCode": "S3", "styleLabel": "Cottage Garden", "url": "https://www.mariannemajerus.com/cache/pcache2/00176294.jpg"}, {"styleCode": "S2", "styleLabel": "Contemporary Minimalist", "url": "https://www.mariannemajerus.com/cache/pcache2/00101331.jpg"}, {"styleCode": "S4", "styleLabel": "Naturalistic / Prairie", "url": "https://www.mariannemajerus.com/cache/pcache2/00006338.jpg"}, {"styleCode": "S8", "styleLabel": "Contemporary Cottage", "url": "https://www.mariannemajerus.com/cache/pcache2/00153061.jpg"}, {"styleCode": "S2", "styleLabel": "Contemporary Minimalist", "url": "https://www.mariannemajerus.com/cache/pcache2/00103311.jpg"}, {"styleCode": "S13", "styleLabel": "Wildlife & Nature", "url": "https://www.mariannemajerus.com/cache/pcache2/00165539.jpg"}, {"styleCode": "S12", "styleLabel": "Formal Contemporary", "url": "https://www.mariannemajerus.com/cache/pcache2/00090117.jpg"}, {"styleCode": "S13", "styleLabel": "Wildlife & Nature", "url": "https://www.mariannemajerus.com/cache/pcache2/00139802.jpg"}, {"styleCode": "S3", "styleLabel": "Cottage Garden", "url": "https://www.mariannemajerus.com/cache/pcache2/00068738.jpg"}, {"styleCode": "S6", "styleLabel": "Wildflower Meadow", "url": "https://www.mariannemajerus.com/cache/pcache2/00050290.jpg"}, {"styleCode": "S12", "styleLabel": "Formal Contemporary", "url": "https://www.mariannemajerus.com/cache/pcache2/00090124.jpg"}, {"styleCode": "S5", "styleLabel": "Woodland & Shade", "url": "https://www.mariannemajerus.com/cache/pcache2/00118735.jpg"}, {"styleCode": "S8", "styleLabel": "Contemporary Cottage", "url": "https://www.mariannemajerus.com/cache/pcache2/00153787.jpg"}, {"styleCode": "S6", "styleLabel": "Wildflower Meadow", "url": "https://www.mariannemajerus.com/cache/pcache2/00077619.jpg"}, {"styleCode": "S3", "styleLabel": "Cottage Garden", "url": "https://www.mariannemajerus.com/cache/pcache2/00173296.jpg"}, {"styleCode": "S5", "styleLabel": "Woodland & Shade", "url": "https://www.mariannemajerus.com/cache/pcache2/00169170.jpg"}, {"styleCode": "S8", "styleLabel": "Contemporary Cottage", "url": "https://www.mariannemajerus.com/cache/pcache2/00148864.jpg"}, {"styleCode": "S1", "styleLabel": "Formal & Classical", "url": "https://www.mariannemajerus.com/cache/pcache2/00179638.jpg"}, {"styleCode": "S8", "styleLabel": "Contemporary Cottage", "url": "https://www.mariannemajerus.com/cache/pcache2/00065513.jpg"}, {"styleCode": "S3", "styleLabel": "Cottage Garden", "url": "https://www.mariannemajerus.com/cache/pcache2/00172042.jpg"}, {"styleCode": "S7", "styleLabel": "Potager / Kitchen Garden", "url": "https://www.mariannemajerus.com/cache/pcache2/00175778.jpg"}, {"styleCode": "S12", "styleLabel": "Formal Contemporary", "url": "https://www.mariannemajerus.com/cache/pcache2/00090142.jpg"}, {"styleCode": "S5", "styleLabel": "Woodland & Shade", "url": "https://www.mariannemajerus.com/cache/pcache2/00033199.jpg"}, {"styleCode": "S11", "styleLabel": "Tropical / Exotic", "url": "https://www.mariannemajerus.com/cache/pcache2/00173896.jpg"}],"feelingWords":[{"word":"Secluded","imageUrl":""},{"word":"Protected","imageUrl":""},{"word":"Calm","imageUrl":""},{"word":"Restored","imageUrl":""},{"word":"Romantic","imageUrl":""},{"word":"Transported","imageUrl":""},{"word":"Connected","imageUrl":""},{"word":"Inspired","imageUrl":""},{"word":"Playful","imageUrl":""},{"word":"Energised","imageUrl":""}],"responses":null};
 const USES = ["Relaxing & unwinding","Entertaining & dining outside","Children playing","Attracting wildlife","Growing herbs","Growing fruit & veg","Growing cut flowers","Active gardening & pottering","A quiet place to think / escape","Exercising"];
 let R = {uses:[],usesOther:'',feelings:[],swipes:[],finalNote:''};
 
@@ -244,7 +248,7 @@ let swipeIdx = 0, tx0 = 0, ty0 = 0, backHintShown = 0;
 // neutral nothing. Axis position = mean of contributions. Style note = nearest
 // styles by Euclidean distance over the 3 axes. Keyed by image URL.
 const COLOUR_MAP = {soft:-2, mid:0, bold:2};
-const IMAGE_TAGS = {"https://www.mariannemajerus.com/cache/pcache2/00179638.jpg": {"id": "S1-2", "formality": -1, "era": -2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00174853.jpg": {"id": "S1-3", "formality": -2, "era": -2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00159013.jpg": {"id": "S1-4", "formality": -2, "era": -1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00155350.jpg": {"id": "S1-5", "formality": -2, "era": -1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00103311.jpg": {"id": "S2-2", "formality": -2, "era": 2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00101331.jpg": {"id": "S2-3", "formality": -1, "era": 2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00101258.jpg": {"id": "S2-4", "formality": -1, "era": 2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00068738.jpg": {"id": "S3-1", "formality": 2, "era": -1, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00173296.jpg": {"id": "S3-2", "formality": -1, "era": -2, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00172042.jpg": {"id": "S3-3", "formality": 2, "era": -1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00176294.jpg": {"id": "S3-5", "formality": 2, "era": -2, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00006338.jpg": {"id": "S4-2", "formality": 2, "era": 2, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00011008.jpg": {"id": "S4-3", "formality": 2, "era": 1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00007742.jpg": {"id": "S4-5", "formality": 2, "era": 2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00118735.jpg": {"id": "S5-1", "formality": 2, "era": 0, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00169170.jpg": {"id": "S5-5", "formality": 2, "era": 1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00072806.jpg": {"id": "S5-7", "formality": 2, "era": 1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00033199.jpg": {"id": "S5-8", "formality": 2, "era": -1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00089252.jpg": {"id": "S6-1", "formality": 2, "era": 0, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00050290.jpg": {"id": "S6-4", "formality": 2, "era": 0, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00077619.jpg": {"id": "S6-5", "formality": 2, "era": 0, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00177501.jpg": {"id": "S7-1", "formality": -1, "era": 1, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00175778.jpg": {"id": "S7-2", "formality": -1, "era": -1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00148864.jpg": {"id": "S8-1", "formality": 2, "era": 1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00065513.jpg": {"id": "S8-2", "formality": 1, "era": 1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00153787.jpg": {"id": "S8-3", "formality": -1, "era": 1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00153061.jpg": {"id": "S8-4", "formality": -1, "era": 1, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00165424.jpg": {"id": "S9-3", "formality": 1, "era": 1, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00057231.jpg": {"id": "S9-4", "formality": 2, "era": 1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00171988.jpg": {"id": "S10-1", "formality": 0, "era": 0, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00173896.jpg": {"id": "S11-1", "formality": 2, "era": 1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00126440.jpg": {"id": "S11-3", "formality": 2, "era": 1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00090117.jpg": {"id": "S12-1", "formality": -2, "era": 2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00090142.jpg": {"id": "S12-3", "formality": -1, "era": 1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00154720.jpg": {"id": "S12-4", "formality": -2, "era": 0, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00090124.jpg": {"id": "S12-5", "formality": -2, "era": 2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00165539.jpg": {"id": "S13-1", "formality": 2, "era": -1, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00139802.jpg": {"id": "S13-5", "formality": 2, "era": 0, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00120382.jpg": {"id": "S13-6", "formality": 1, "era": 1, "colour": "mid"}};
+const IMAGE_TAGS = {"https://www.mariannemajerus.com/cache/pcache2/00179638.jpg": {"id": "S1-2", "formality": -1, "era": -2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00174853.jpg": {"id": "S1-3", "formality": -2, "era": -2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00159013.jpg": {"id": "S1-4", "formality": -2, "era": -1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00155350.jpg": {"id": "S1-5", "formality": -2, "era": -1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00103311.jpg": {"id": "S2-2", "formality": -2, "era": 2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00101331.jpg": {"id": "S2-3", "formality": -1, "era": 2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00045880.jpg": {"id": "S2-4", "formality": -1, "era": 2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00068738.jpg": {"id": "S3-1", "formality": 2, "era": -1, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00173296.jpg": {"id": "S3-2", "formality": -1, "era": -2, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00172042.jpg": {"id": "S3-3", "formality": 2, "era": -1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00176294.jpg": {"id": "S3-5", "formality": 2, "era": -2, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00006338.jpg": {"id": "S4-2", "formality": 2, "era": 2, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00011008.jpg": {"id": "S4-3", "formality": 2, "era": 1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00007742.jpg": {"id": "S4-5", "formality": 2, "era": 2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00118735.jpg": {"id": "S5-1", "formality": 2, "era": 0, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00169170.jpg": {"id": "S5-5", "formality": 2, "era": 1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00072806.jpg": {"id": "S5-7", "formality": 2, "era": 1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00033199.jpg": {"id": "S5-8", "formality": 2, "era": -1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00089252.jpg": {"id": "S6-1", "formality": 2, "era": 0, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00050290.jpg": {"id": "S6-4", "formality": 2, "era": 0, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00077619.jpg": {"id": "S6-5", "formality": 2, "era": 0, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00177501.jpg": {"id": "S7-1", "formality": -1, "era": 1, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00175778.jpg": {"id": "S7-2", "formality": -1, "era": -1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00148864.jpg": {"id": "S8-1", "formality": 2, "era": 1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00065513.jpg": {"id": "S8-2", "formality": 1, "era": 1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00153787.jpg": {"id": "S8-3", "formality": -1, "era": 1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00153061.jpg": {"id": "S8-4", "formality": -1, "era": 1, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00165424.jpg": {"id": "S9-3", "formality": 1, "era": 1, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00057231.jpg": {"id": "S9-4", "formality": 2, "era": 1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00171988.jpg": {"id": "S10-1", "formality": 0, "era": 0, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00173896.jpg": {"id": "S11-1", "formality": 2, "era": 1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00126440.jpg": {"id": "S11-3", "formality": 2, "era": 1, "colour": "bold"}, "https://www.mariannemajerus.com/cache/pcache2/00090117.jpg": {"id": "S12-1", "formality": -2, "era": 2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00090142.jpg": {"id": "S12-3", "formality": -1, "era": 1, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00154720.jpg": {"id": "S12-4", "formality": -2, "era": 0, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00090124.jpg": {"id": "S12-5", "formality": -2, "era": 2, "colour": "soft"}, "https://www.mariannemajerus.com/cache/pcache2/00165539.jpg": {"id": "S13-1", "formality": 2, "era": -1, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00139802.jpg": {"id": "S13-5", "formality": 2, "era": 0, "colour": "mid"}, "https://www.mariannemajerus.com/cache/pcache2/00120382.jpg": {"id": "S13-6", "formality": 1, "era": 1, "colour": "mid"}};
 const STYLE_GRID = {"S1": {"name": "Formal & Classical", "formality": -2, "era": -2, "colour": -1, "from": "Traditional, structured, symmetrical; restrained colour, green-dominant."}, "S2": {"name": "Contemporary Minimalist", "formality": -2, "era": 2, "colour": -1, "from": "Modern, clean lines, restrained; tight palette, hard materials."}, "S3": {"name": "Cottage Garden", "formality": 2, "era": -2, "colour": 1, "from": "Traditional, informal, abundant; overflowing colour."}, "S4": {"name": "Naturalistic / Prairie", "formality": 2, "era": 2, "colour": 0, "from": "Contemporary, ecological, dynamic; flowing drifts."}, "S5": {"name": "Woodland & Shade", "formality": 1, "era": 0, "colour": -1, "from": "Naturalistic, layered, seasonal; foliage/texture over flowers, muted."}, "S6": {"name": "Wildflower Meadow", "formality": 2, "era": 0, "colour": 0, "from": "Naturalistic, ecological, open; mixed wildflower colour, mown edge."}, "S7": {"name": "Potager / Kitchen Garden", "formality": -1, "era": -1, "colour": 0, "from": "Traditional, productive, structured; geometric beds, mixed colour."}, "S8": {"name": "Contemporary Cottage", "formality": 1, "era": 1, "colour": -1, "from": "Transitional, informal, considered; edited palette, modern hard landscape."}, "S9": {"name": "Mediterranean / Gravel", "formality": 1, "era": 1, "colour": -1, "from": "Informal, drought-tolerant, warm; silver-grey foliage, sun-bleached/muted."}, "S10": {"name": "Japanese / Zen Inspired", "formality": 0, "era": 0, "colour": -2, "from": "Contemplative, restrained, symbolic; green/grey, near-no flower colour."}, "S11": {"name": "Tropical / Exotic", "formality": 2, "era": 1, "colour": 2, "from": "Bold, lush, architectural; hot colours, dramatic foliage."}, "S12": {"name": "Formal Contemporary", "formality": -2, "era": 2, "colour": -1, "from": "Modern, structured, graphic; bold clipped shapes, restrained palette."}, "S13": {"name": "Wild / Rewilded", "formality": 2, "era": 0, "colour": 0, "from": "Ecological, low intervention, seasonal; native, seedheads, natural colour."}};
 
 function axisVal(t, axis){ return axis==='colour' ? COLOUR_MAP[t.colour] : t[axis]; }
@@ -322,9 +326,15 @@ function buildUses(){
 }
 function cssEscape(s){ return s.replace(/"/g,'\\"'); }
 
+let usesNudged=false;
 function saveUses(){
   R.uses = [...document.querySelectorAll('#uses-list input:checked')].map(c=>c.value);
   R.usesOther = document.getElementById('uses-other').value.trim();
+  if (R.uses.length===0 && !R.usesOther && !usesNudged){
+    usesNudged=true;
+    document.getElementById('uses-nudge').style.display='block';
+    return;
+  }
   if (editReturn) { editReturn=false; buildSummary(); go('s-submit'); }
   else go('s-feelings');
 }
@@ -352,18 +362,29 @@ function styleFeel(cb){
 }
 
 // Feelings "Next" goes to swipe-intro normally, or back to summary if editing
+let feelNudged=false;
 function feelingsNext(){
+  if (R.feelings.length===0 && !feelNudged){
+    feelNudged=true;
+    document.getElementById('feel-nudge').style.display='block';
+    return;
+  }
   if (editReturn) { editReturn=false; buildSummary(); go('s-submit'); }
   else go('s-swipe-intro');
 }
 
-function startSwipe(){ swipeIdx=0; R.swipes=[]; backHintShown=0; go('s-swipe'); renderCard(); initTouch(); }
+function startSwipe(){ swipeIdx=0; R.swipes=[]; backHintShown=0; SESSION.swipeImages.slice(0,3).forEach(i=>preload(i.url)); go('s-swipe'); renderCard(); initTouch(); }
 
+const _preloaded={};
+function preload(url){ if(url&&!_preloaded[url]){ const i=new Image(); i.src=url; _preloaded[url]=i; } }
 function renderCard(){
   const imgs = SESSION.swipeImages;
   if (swipeIdx>=imgs.length){ buildSummary(); go('s-submit'); return; }
   const img = imgs[swipeIdx];
   document.getElementById('swipe-img').src = img.url;
+  // preload the next two images so they appear instantly
+  preload(imgs[swipeIdx+1] && imgs[swipeIdx+1].url);
+  preload(imgs[swipeIdx+2] && imgs[swipeIdx+2].url);
   document.getElementById('swipe-ctr').textContent = (swipeIdx+1)+' of '+imgs.length;
   document.getElementById('swipe-prog').style.width = Math.round((swipeIdx/imgs.length)*100)+'%';
   // back button visible from 2nd image onward
@@ -469,12 +490,13 @@ function buildSummary(){
     <div style="background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;">
       <div style="padding:11px 14px;border-bottom:1px solid var(--border);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-light);">Gardens you reacted to</div>
       <div style="padding:11px 14px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;">
-        <div><div style="font-size:24px;font-family:'Cormorant Garamond',serif;color:var(--sage-dark);">${likes}</div><div style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.08em;">Appealed</div></div>
-        <div><div style="font-size:24px;font-family:'Cormorant Garamond',serif;color:var(--ink-mid);">${dislikes}</div><div style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.08em;">Not for me</div></div>
+        <div><div style="font-size:24px;font-family:'Cormorant Garamond',serif;color:var(--sage-dark);">${likes}</div><div style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.08em;">Liked</div></div>
+        <div><div style="font-size:24px;font-family:'Cormorant Garamond',serif;color:var(--ink-mid);">${dislikes}</div><div style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.08em;">Disliked</div></div>
         <div><div style="font-size:24px;font-family:'Cormorant Garamond',serif;color:var(--ink-light);">${neutrals}</div><div style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.08em;">Neutral</div></div>
       </div>
       ${notes?`<div style="padding:0 14px 11px;font-size:12px;color:var(--ink-light);text-align:center;">${notes} note${notes>1?'s':''} added</div>`:''}
-    </div>`;
+    </div>
+    <p style="margin-top:16px;font-size:13px;color:var(--ink-mid);font-style:italic;line-height:1.6;text-align:center;">From the gardens you were drawn to, some themes are starting to emerge &mdash; we'll explore these together when we meet.</p>`;
 }
 
 function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }

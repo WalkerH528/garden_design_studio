@@ -526,7 +526,7 @@ function buildSummary(){
 
 function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mpqneegd';
+const WEB3FORMS_KEY = 'f099b35a-fe95-4cfc-8aeb-f4f46a2fff07';
 
 // Build a readable plain-text summary for the designer's inbox.
 function buildReadableSummary(){
@@ -536,24 +536,24 @@ function buildReadableSummary(){
   const neutrals = R.swipes.filter(s=>s.verdict==='neutral');
   const noted = R.swipes.filter(s=>s.note);
   let out = '';
-  out += 'GARDEN STYLE PROFILER — RESPONSE\\n';
-  out += 'PIN: ' + (SESSION.pin||'(none)') + '\\n';
-  out += 'Submitted: ' + new Date().toLocaleString('en-GB') + '\\n\\n';
-  out += 'HOW THEY WANT TO USE IT:\\n  ' + (R.uses.length?R.uses.join(', '):'(none)') + (R.usesOther?('\\n  Other: '+R.usesOther):'') + '\\n\\n';
-  out += 'HOW THEY WANT TO FEEL:\\n  ' + (R.feelings.length?R.feelings.join(', '):'(none)') + '\\n\\n';
-  out += 'STYLE READING (designer — all axes):\\n';
-  out += '  Formality: ' + r.axes.formality.toFixed(2) + '  (-2 formal .. +2 informal)\\n';
-  out += '  Era:       ' + r.axes.era.toFixed(2) + '  (-2 traditional .. +2 contemporary)\\n';
-  out += '  Colour:    ' + r.axes.colour.toFixed(2) + '  (-2 soft .. +2 bold)\\n';
-  out += '  Nearest styles: ' + r.styleNote.map(s=>s.name).join(', ') + '\\n';
-  out += '  Client saw: "' + clientReadout(r.axes) + '"\\n\\n';
-  out += 'REACTIONS: ' + likes.length + ' liked, ' + dislikes.length + ' disliked, ' + neutrals.length + ' neutral\\n\\n';
+  out += 'GARDEN STYLE PROFILER — RESPONSE\n';
+  out += 'PIN: ' + (SESSION.pin||'(none)') + '\n';
+  out += 'Submitted: ' + new Date().toLocaleString('en-GB') + '\n\n';
+  out += 'HOW THEY WANT TO USE IT:\n  ' + (R.uses.length?R.uses.join(', '):'(none)') + (R.usesOther?('\n  Other: '+R.usesOther):'') + '\n\n';
+  out += 'HOW THEY WANT TO FEEL:\n  ' + (R.feelings.length?R.feelings.join(', '):'(none)') + '\n\n';
+  out += 'STYLE READING (designer — all axes):\n';
+  out += '  Formality: ' + r.axes.formality.toFixed(2) + '  (-2 formal .. +2 informal)\n';
+  out += '  Era:       ' + r.axes.era.toFixed(2) + '  (-2 traditional .. +2 contemporary)\n';
+  out += '  Colour:    ' + r.axes.colour.toFixed(2) + '  (-2 soft .. +2 bold)\n';
+  out += '  Nearest styles: ' + r.styleNote.map(s=>s.name).join(', ') + '\n';
+  out += '  Client saw: "' + clientReadout(r.axes) + '"\n\n';
+  out += 'REACTIONS: ' + likes.length + ' liked, ' + dislikes.length + ' disliked, ' + neutrals.length + ' neutral\n\n';
   if (noted.length){
-    out += 'NOTES ON IMAGES:\\n';
-    noted.forEach(s=>{ out += '  [' + s.verdict + '] ' + (s.styleLabel||s.styleCode) + ': ' + s.note + '\\n'; });
-    out += '\\n';
+    out += 'NOTES ON IMAGES:\n';
+    noted.forEach(s=>{ out += '  [' + s.verdict + '] ' + (s.styleLabel||s.styleCode) + ': ' + s.note + '\n'; });
+    out += '\n';
   }
-  if (R.finalNote) out += 'ANYTHING ELSE:\\n  ' + R.finalNote + '\\n';
+  if (R.finalNote) out += 'ANYTHING ELSE:\n  ' + R.finalNote + '\n';
   return out;
 }
 
@@ -566,21 +566,24 @@ function submit(){
   SESSION.submittedAt = new Date().toISOString();
   go('s-thanks');
 
-  // Send to Formspree: readable summary + full data block (for Studio import).
-  // Nothing is downloaded to the client's device. If the send fails, show a
-  // gentle error on the thank-you screen so the response isn't silently lost.
+  // Send to Web3Forms. Nothing is downloaded to the client's device.
+  // Clean named fields (readable in the email) + a structured data field for Studio.
+  // If the send fails, show a gentle error on the thank-you screen.
   const payload = {
+    access_key: WEB3FORMS_KEY,
+    subject: 'Garden Style Profiler — new response (PIN ' + (SESSION.pin||'?') + ')',
+    from_name: 'Garden Style Profiler',
+    pin: SESSION.pin || '(none)',
+    submitted: new Date().toLocaleString('en-GB'),
     summary: buildReadableSummary(),
-    pin: SESSION.pin || '',
-    submittedAt: SESSION.submittedAt,
-    data: JSON.stringify({pin:SESSION.pin, submittedAt:SESSION.submittedAt, responses:R})
+    data_for_studio: JSON.stringify({pin:SESSION.pin, submittedAt:SESSION.submittedAt, responses:R})
   };
-  fetch(FORMSPREE_ENDPOINT, {
+  fetch('https://api.web3forms.com/submit', {
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
     body: JSON.stringify(payload)
-  }).then(res=>{
-    if(!res.ok) showSendError();
+  }).then(res=>res.json()).then(d=>{
+    if(!d || !d.success) showSendError();
   }).catch(()=>{ showSendError(); });
 }
 

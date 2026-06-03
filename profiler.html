@@ -6,14 +6,14 @@
 <title>Your Garden Style</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
-/* Garden Design Studio brand tokens — Peony Pink accent (profiler), Jun 2026.
+/* Garden Design Studio brand tokens — Moss Fern accent (profiler), Jun 2026.
    --sage* names retained as semantic aliases to keep the markup stable;
-   values now map to Peony Pink + brand neutrals. */
+   values now map to Moss Fern + brand neutrals. */
 :root{
-  --sage:#D58A98;        /* lighter pink — progress bar, small labels */
-  --sage-light:#F6E8EB;  /* pale pink tint — selected pills, nudge backgrounds */
-  --sage-dark:#C9697A;   /* Peony Pink — buttons, links, primary accent */
-  --sage-press:#A8505F;  /* darker pink — button :active */
+  --sage:#7A9472;        /* lighter moss — progress bar, small labels */
+  --sage-light:#E6EDE3;  /* pale moss tint — selected pills, nudge backgrounds */
+  --sage-dark:#4A6E44;   /* Moss Fern — buttons, links, primary accent */
+  --sage-press:#3A5736;  /* darker moss — button :active */
   --stone-light:#EDE8E0; /* cream */
   --ink:#2A2825;         /* dark slate — primary text */
   --ink-mid:#6B6259;     /* warm grey — secondary text */
@@ -206,7 +206,7 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
   <div style="padding:12px 24px 26px;display:flex;gap:10px;justify-content:center;max-width:380px;margin:0 auto;width:100%;flex-shrink:0;" id="swipe-buttons">
     <button onclick="doSwipe('dislike')" style="flex:1;padding:13px;border-radius:50px;border:1px solid var(--border);background:var(--white);font-size:13px;cursor:pointer;color:var(--ink-mid);font-family:'Libre Baskerville',Georgia,serif;">Dislike</button>
     <button onclick="doSwipe('neutral')" style="flex:0.85;padding:13px;border-radius:50px;border:1px solid var(--border);background:var(--white);font-size:12px;cursor:pointer;color:var(--ink-light);font-family:'Libre Baskerville',Georgia,serif;">Neutral</button>
-    <button onclick="doSwipe('like')" style="flex:1;padding:13px;border-radius:50px;border:1px solid var(--sage-light);background:var(--sage-light);font-size:13px;cursor:pointer;color:var(--sage-dark);font-family:'Libre Baskerville',Georgia,serif;">Like</button>
+    <button onclick="doSwipe('like')" style="flex:1;padding:13px;border-radius:50px;border:1px solid var(--border);background:var(--white);font-size:13px;cursor:pointer;color:var(--ink-mid);font-family:'Libre Baskerville',Georgia,serif;">Like</button>
   </div>
   <div style="text-align:center;padding:0 24px 20px;flex-shrink:0;"><button class="back-btn" id="swipe-back" onclick="swipeBack()" style="display:none;">&larr; Back</button></div>
 </div>

@@ -5,12 +5,27 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>Your Garden Style</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap');
-:root{--sage:#7a8c6e;--sage-light:#e8ede4;--sage-dark:#4a5c3e;--stone-light:#f5f0e8;--ink:#2c2c28;--ink-mid:#5a5a52;--ink-light:#8a8a7e;--cream:#faf8f3;--white:#ffffff;--border:#e0d8cc;}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+/* Garden Design Studio brand tokens — Peony Pink accent (profiler), Jun 2026.
+   --sage* names retained as semantic aliases to keep the markup stable;
+   values now map to Peony Pink + brand neutrals. */
+:root{
+  --sage:#D58A98;        /* lighter pink — progress bar, small labels */
+  --sage-light:#F6E8EB;  /* pale pink tint — selected pills, nudge backgrounds */
+  --sage-dark:#C9697A;   /* Peony Pink — buttons, links, primary accent */
+  --sage-press:#A8505F;  /* darker pink — button :active */
+  --stone-light:#EDE8E0; /* cream */
+  --ink:#2A2825;         /* dark slate — primary text */
+  --ink-mid:#6B6259;     /* warm grey — secondary text */
+  --ink-light:#A89E90;   /* stone — captions, muted labels */
+  --cream:#F7F4F0;       /* off-white — page background */
+  --white:#FFFFFF;
+  --border:#E0D8CC;
+}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;}
-body{font-family:'Jost',sans-serif;font-weight:300;background:var(--cream);color:var(--ink);font-size:15px;line-height:1.6;overflow-x:hidden;}
-h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:500;}
+body{font-family:'Libre Baskerville',Georgia,serif;font-weight:400;background:var(--cream);color:var(--ink);font-size:14px;line-height:1.65;overflow-x:hidden;}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:600;}
 /* Each screen fills the viewport; inner content centres. Goal: fit one screen.
    Dense screens (uses, summary) may scroll on small phones via .inner-scroll. */
 .screen{display:none;min-height:100vh;min-height:100dvh;flex-direction:column;}
@@ -18,19 +33,19 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:500;}
 .inner{flex:1;padding:28px 24px;max-width:480px;margin:0 auto;width:100%;display:flex;flex-direction:column;}
 .inner-center{justify-content:center;}
 .inner-scroll{overflow-y:auto;}
-.btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:14px 24px;border-radius:4px;font-family:'Jost',sans-serif;font-size:12px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border:none;width:100%;transition:background 0.15s;}
-.btn-p{background:var(--sage-dark);color:white;}
-.btn-p:active{background:var(--sage);}
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:14px 24px;border-radius:4px;font-family:'Libre Baskerville',Georgia,serif;font-size:13px;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border:none;width:100%;transition:background 0.15s;}
+.btn-p{background:var(--sage-dark);color:var(--cream);}
+.btn-p:active{background:var(--sage-press);}
 .btn-s{background:transparent;color:var(--ink-mid);border:1px solid var(--border);}
-.btn-ghost{background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;color:var(--ink-light);cursor:pointer;padding:4px 0;}
+.btn-ghost{background:none;border:none;font-family:'Libre Baskerville',Georgia,serif;font-size:13px;color:var(--ink-light);cursor:pointer;padding:4px 0;}
 .label{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-light);display:block;margin-bottom:6px;}
 .step-badge{display:inline-block;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-light);margin-bottom:12px;}
 a.inline-link{color:var(--sage-dark);text-decoration:underline;}
 /* Back button — small, top-left, consistent across screens */
 .backbar{padding:14px 20px 0;max-width:480px;margin:0 auto;width:100%;flex-shrink:0;}
-.back-btn{background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;color:var(--ink-light);cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 0;}
+.back-btn{background:none;border:none;font-family:'Libre Baskerville',Georgia,serif;font-size:13px;color:var(--ink-light);cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 0;}
 .back-btn:active{color:var(--ink-mid);}
-.edit-link{background:none;border:none;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--sage-dark);cursor:pointer;text-decoration:underline;padding:0;}
+.edit-link{background:none;border:none;font-family:'Libre Baskerville',Georgia,serif;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--sage-dark);cursor:pointer;text-decoration:underline;padding:0;}
 </style>
 </head>
 <body>
@@ -95,7 +110,7 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
     <div style="margin-bottom:18px;">
       <span class="label">Anything else?</span>
       <textarea id="uses-other" rows="2" placeholder="Add anything not listed above&hellip;"
-        style="width:100%;font-family:'Jost',sans-serif;font-size:14px;font-weight:300;padding:10px 12px;border:1px solid var(--border);border-radius:4px;background:var(--white);color:var(--ink);resize:none;"></textarea>
+        style="width:100%;font-family:'Libre Baskerville',Georgia,serif;font-size:14px;font-weight:300;padding:10px 12px;border:1px solid var(--border);border-radius:4px;background:var(--white);color:var(--ink);resize:none;"></textarea>
     </div>
     <div id="uses-nudge" style="display:none;font-size:13px;color:var(--ink-mid);background:var(--sage-light);padding:10px 12px;border-radius:6px;margin-bottom:12px;">Select at least one to continue &mdash; or tap Next again to skip if none apply.</div>
     <button class="btn btn-p" onclick="saveUses()">Next &rarr;</button>
@@ -178,20 +193,20 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
         <div style="padding:8px 0 0;text-align:center;font-size:12px;color:var(--ink-light);">Swipe the photo, or tap a button below.</div>
         <!-- note affordance (note BEFORE swipe) -->
         <div style="padding:8px 0 0;text-align:center;">
-          <button id="add-note-btn" onclick="openNote()" style="background:none;border:none;font-family:'Jost',sans-serif;font-size:13px;color:var(--ink-light);cursor:pointer;text-decoration:underline;">+ Add a note</button>
+          <button id="add-note-btn" onclick="openNote()" style="background:none;border:none;font-family:'Libre Baskerville',Georgia,serif;font-size:13px;color:var(--ink-light);cursor:pointer;text-decoration:underline;">+ Add a note</button>
         </div>
         <div id="note-box" style="display:none;padding:8px 0 0;">
           <textarea id="note-text" rows="2" placeholder="e.g. colour, a plant, the style, or a memory&hellip;"
-            style="width:100%;font-family:'Jost',sans-serif;font-size:13px;font-weight:300;padding:10px 12px;border:1px solid var(--border);border-radius:4px;background:var(--white);color:var(--ink);resize:none;"></textarea>
+            style="width:100%;font-family:'Libre Baskerville',Georgia,serif;font-size:13px;font-weight:300;padding:10px 12px;border:1px solid var(--border);border-radius:4px;background:var(--white);color:var(--ink);resize:none;"></textarea>
         </div>
       </div>
     </div>
   </div>
 
   <div style="padding:12px 24px 26px;display:flex;gap:10px;justify-content:center;max-width:380px;margin:0 auto;width:100%;flex-shrink:0;" id="swipe-buttons">
-    <button onclick="doSwipe('dislike')" style="flex:1;padding:13px;border-radius:50px;border:1px solid var(--border);background:var(--white);font-size:13px;cursor:pointer;color:var(--ink-mid);font-family:'Jost',sans-serif;">Dislike</button>
-    <button onclick="doSwipe('neutral')" style="flex:0.85;padding:13px;border-radius:50px;border:1px solid var(--border);background:var(--white);font-size:12px;cursor:pointer;color:var(--ink-light);font-family:'Jost',sans-serif;">Neutral</button>
-    <button onclick="doSwipe('like')" style="flex:1;padding:13px;border-radius:50px;border:1px solid var(--sage-light);background:var(--sage-light);font-size:13px;cursor:pointer;color:var(--sage-dark);font-family:'Jost',sans-serif;">Like</button>
+    <button onclick="doSwipe('dislike')" style="flex:1;padding:13px;border-radius:50px;border:1px solid var(--border);background:var(--white);font-size:13px;cursor:pointer;color:var(--ink-mid);font-family:'Libre Baskerville',Georgia,serif;">Dislike</button>
+    <button onclick="doSwipe('neutral')" style="flex:0.85;padding:13px;border-radius:50px;border:1px solid var(--border);background:var(--white);font-size:12px;cursor:pointer;color:var(--ink-light);font-family:'Libre Baskerville',Georgia,serif;">Neutral</button>
+    <button onclick="doSwipe('like')" style="flex:1;padding:13px;border-radius:50px;border:1px solid var(--sage-light);background:var(--sage-light);font-size:13px;cursor:pointer;color:var(--sage-dark);font-family:'Libre Baskerville',Georgia,serif;">Like</button>
   </div>
   <div style="text-align:center;padding:0 24px 20px;flex-shrink:0;"><button class="back-btn" id="swipe-back" onclick="swipeBack()" style="display:none;">&larr; Back</button></div>
 </div>
@@ -209,7 +224,7 @@ a.inline-link{color:var(--sage-dark);text-decoration:underline;}
     <div style="margin-bottom:18px;">
       <span class="label">Anything else you'd like me to know? (optional)</span>
       <textarea id="final-note" rows="3" placeholder="Anything at all &mdash; things you love, things to avoid, how you use the space&hellip;"
-        style="width:100%;font-family:'Jost',sans-serif;font-size:14px;font-weight:300;padding:10px 12px;border:1px solid var(--border);border-radius:4px;background:var(--white);color:var(--ink);resize:none;"></textarea>
+        style="width:100%;font-family:'Libre Baskerville',Georgia,serif;font-size:14px;font-weight:300;padding:10px 12px;border:1px solid var(--border);border-radius:4px;background:var(--white);color:var(--ink);resize:none;"></textarea>
     </div>
     <button class="btn btn-p" onclick="submit()">Send it over &rarr;</button>
   </div>
